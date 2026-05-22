@@ -1,0 +1,58 @@
+Here's a functional solution in Python that swaps the keys and values of a dictionary, handling duplicate values by collecting them into a list (making the result a dictionary of lists).
+
+```python
+from typing import Dict, Any, List, Union
+
+def swap_dict(d: Dict[Any, Any]) -> Dict[Any, List[Any]]:
+    """
+    Swap keys and values of a dictionary.
+    
+    When multiple keys map to the same value, the output dict contains that value
+    as a key and a list of all original keys as its value.
+    """
+    result: Dict[Any, List[Any]] = {}
+    for key, value in d.items():
+        result.setdefault(value, []).append(key)
+    return result
+```
+
+**Functional style note:**  
+The `setdefault` and `append` mutate the result dict inside the loop. To be fully immutable (side‑effect free), you could use a `functools.reduce`:
+
+```python
+from functools import reduce
+from typing import Dict, Any, List
+
+def swap_dict_pure(d: Dict[Any, Any]) -> Dict[Any, List[Any]]:
+    return reduce(
+        lambda acc, kv: {k, v: acc.setdefault(v, []).append(k) or acc,
+        d.items(),
+        {}
+    )
+```
+
+But the first version is clearer and still respects the functional paradigm of returning a new dictionary without modifying the input. The second uses `setdefault` and `or` trick to avoid explicit mutation, but is less readable.
+
+If you instead need to **overwrite** duplicates**, raise an error:
+
+```python
+def swap_dict(d: Dict[]) -> Dict[Any, Any]:
+    result = {v: k for k, v in d.items()}  # last duplicate wins
+    if len(result) != len(d):
+        raise ValueError("Duplicate values found, cannot guarantee collision")
+    return result
+```
+
+**Example usage:**
+
+```python
+original = {'a': 1, 'b': 2, 'c': 1}
+swapped = swap_dict(original)
+print(swapped)  # {1: ['a', 'c'], 2: ['b']}
+```
+
+**Key characteristics:**
+- Pure function: no modification of input.
+- Handles any hashable keys/values.
+- Manages duplicate values by aggregatively (or throws error if preferred).
+- Returns a new dictionary – no side effects.
