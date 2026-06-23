@@ -8,6 +8,16 @@ work before reaching for abstractions.
 
 ---
 
+## Why AI Agents?
+
+Traditional software follows predefined instructions.
+
+AI agents introduce a different paradigm: instead of hardcoding every step, we provide goals, tools, memory, and an environment, allowing the system to decide how to achieve an objective.
+
+The real power of AI agents isn't automation—it's adaptability. They allow software to move beyond rigid workflows and make decisions based on goals, context, and available tools.
+
+---
+
 ## Agents
 
 ### 1. README Agent (`readme_agent/`)
