@@ -2,8 +2,13 @@
 Entry point for the AI Agent system.
 """
 
+import os
+
 from agent import Agent
 from Prompts import SYSTEM_PROMPT
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def main():

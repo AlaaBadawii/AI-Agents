@@ -137,6 +137,25 @@ python main.py
 
 ---
 
+## Running with Docker
+
+Build and start the containers:
+
+```bash
+docker compose up --build
+```
+
+Run a specific agent:
+
+```bash
+docker compose run readme-agent
+```
+
+```bash
+docker compose run agent-assistant
+```
+---
+
 ## Why No Frameworks?
 
 LangChain and CrewAI are useful but they hide the mechanics. When something breaks

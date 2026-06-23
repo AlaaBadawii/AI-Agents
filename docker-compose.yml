@@ -1,0 +1,12 @@
+services:
+  readme-agent:
+    build: ./Readme_Agent
+    env_file:
+      - .env
+
+  agent-assistant:
+    build: ./Agent_Assistant
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
