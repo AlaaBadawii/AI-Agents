@@ -1,0 +1,9 @@
+{
+    "app_name": "Quizey",
+    "debug": true,
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "name": "quizey_db"
+    }
+}
