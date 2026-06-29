@@ -10,3 +10,10 @@ services:
       - .env
     stdin_open: true
     tty: true
+
+  multi-agents:
+    build: ./Multi_Agents
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true

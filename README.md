@@ -1,6 +1,6 @@
 # AI Agents From Scratch
 
-Two autonomous AI agents built **without frameworks** like LangChain or CrewAI.
+Three autonomous AI agents built **without frameworks** like LangChain or CrewAI.
 
 Every component — the agent loop, tool registry, memory, and environment — is
 implemented manually in pure Python. The goal was to understand how agents actually
@@ -53,6 +53,21 @@ loop handles multi-turn conversation, parallel tool calls, and memory across tur
 
 ---
 
+### 3. Multi Agents (`Multi_Agents/`)
+
+A lightweight multi-agent orchestrator that routes user requests to specialized agents.
+
+**Architecture:** A top-level orchestrator delegates to a question generator agent,
+which can then use registered tools to generate and validate multiple-choice questions.
+
+**Key concepts demonstrated:**
+- Multi-agent orchestration
+- Agent registration and routing
+- Tool-backed question generation and validation
+- Simple terminal-based workflow with OpenRouter
+
+---
+
 ## What I Learned
 
 Building agents without frameworks forces you to understand:
@@ -101,6 +116,14 @@ ai-agents-from-scratch/
 │   ├── main.py                 # Entry point with interactive loop
 │   └── test_memory.py          # Memory unit tests
 │
+├── Multi_Agents/               # Agent 3 — multi-agent question workflow
+│   ├── agents/                 # Orchestrator and question generator agents
+│   ├── registery/              # Agent and tool registries/decorators
+│   ├── tools/                  # Question generation tools
+│   ├── llm.py                  # OpenRouter adapter
+│   ├── main.py                 # Terminal entry point
+│   └── README.md               # Project-specific documentation
+│
 └── README.md                   # This file
 ```
 
@@ -121,6 +144,12 @@ pip install litellm python-dotenv
 For Agent Assistant:
 ```bash
 cd agent_assistant
+pip install -r requirements.txt
+```
+
+For Multi Agents:
+```bash
+cd Multi_Agents
 pip install -r requirements.txt
 ```
 
@@ -145,6 +174,12 @@ cd agent_assistant
 python main.py
 ```
 
+Multi Agents:
+```bash
+cd Multi_Agents
+python main.py
+```
+
 ---
 
 ## Running with Docker
@@ -163,6 +198,10 @@ docker compose run readme-agent
 
 ```bash
 docker compose run agent-assistant
+```
+
+```bash
+docker compose run multi-agents
 ```
 ---
 
